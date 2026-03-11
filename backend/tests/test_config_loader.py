@@ -9,7 +9,7 @@ import pytest
 from awe.config.loader import load_agent, load_pipeline
 
 
-EXAMPLES_DIR = Path(__file__).parent.parent / "examples"
+EXAMPLES_DIR = Path(__file__).resolve().parent.parent.parent / "examples"
 
 
 def test_load_pipeline():

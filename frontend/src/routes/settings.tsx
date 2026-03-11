@@ -1,7 +1,10 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createRoute } from '@tanstack/react-router'
 import Typography from '@mui/material/Typography'
+import { Route as rootRoute } from './__root'
 
-export const Route = createFileRoute('/settings')({
+export const Route = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/settings',
   component: SettingsPage,
 })
 

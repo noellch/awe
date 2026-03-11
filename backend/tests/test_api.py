@@ -9,7 +9,7 @@ from httpx import ASGITransport, AsyncClient
 
 from awe.api.app import create_app
 
-EXAMPLES_DIR = Path(__file__).resolve().parent.parent / "examples"
+EXAMPLES_DIR = Path(__file__).resolve().parent.parent.parent / "examples"
 
 
 @pytest.fixture

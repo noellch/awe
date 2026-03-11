@@ -2,7 +2,7 @@
 name = "awe"
 version = "0.1.0"
 description = "Agent Workflow Engine - A workflow engine for LLM agent orchestration"
-readme = "README.md"
+readme = "../README.md"
 authors = [
     { name = "Noel", email = "acrecapv@gmail.com" }
 ]
