@@ -1,16 +1,25 @@
 import { useQuery } from '@tanstack/react-query'
 import { fetchApi } from './client'
 
-interface Pipeline {
-  id: string
+export interface PipelineSummary {
   name: string
-  status: string
+  description: string
+  step_count: number
+  file_path: string
 }
 
-interface Agent {
-  id: string
+export interface PipelineDetail {
   name: string
-  type: string
+  description: string
+  context: Record<string, string>
+  steps: Array<{ id: string; agent: string; prompt: string }>
+}
+
+export interface AgentSummary {
+  name: string
+  role: string | null
+  model_id: string
+  capabilities_tags: string[]
 }
 
 interface Run {
@@ -31,14 +40,30 @@ interface RunsParams {
 export function usePipelines() {
   return useQuery({
     queryKey: ['pipelines'],
-    queryFn: () => fetchApi<Pipeline[]>('/api/pipelines'),
+    queryFn: () => fetchApi<PipelineSummary[]>('/api/pipelines'),
+  })
+}
+
+export function usePipeline(name: string) {
+  return useQuery({
+    queryKey: ['pipeline', name],
+    queryFn: () => fetchApi<PipelineDetail>(`/api/pipelines/${name}`),
+    enabled: !!name,
   })
 }
 
 export function useAgents() {
   return useQuery({
     queryKey: ['agents'],
-    queryFn: () => fetchApi<Agent[]>('/api/agents'),
+    queryFn: () => fetchApi<AgentSummary[]>('/api/agents'),
+  })
+}
+
+export function useAgent(name: string) {
+  return useQuery({
+    queryKey: ['agent', name],
+    queryFn: () => fetchApi<AgentSummary>(`/api/agents/${name}`),
+    enabled: !!name,
   })
 }
 
