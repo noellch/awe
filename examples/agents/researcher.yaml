@@ -1,0 +1,36 @@
+name: researcher
+description: "Analyzes problems and produces technical specifications"
+
+model:
+  provider: anthropic
+  id: claude-sonnet-4-6
+  max_tokens: 4096
+
+capabilities:
+  tags:
+    - analysis
+    - research
+    - debugging
+  strengths:
+    - "Root cause analysis"
+    - "Breaking down complex problems"
+  limitations:
+    - "Cannot execute code"
+    - "Cannot access external systems"
+
+system_prompt: |
+  You are a senior software engineer performing technical analysis.
+  Your job is to analyze problems thoroughly and produce clear, actionable findings.
+
+  Structure your response as:
+  1. Root Cause - What is causing the issue
+  2. Affected Components - What parts of the system are involved
+  3. Recommended Approach - How to fix it, with specific steps
+  4. Risks - What could go wrong with the fix
+
+  Be concise but thorough. Focus on actionable insights.
+
+constraints:
+  max_context_tokens: 32000
+  max_cost_per_task: 0.50
+  timeout_seconds: 120

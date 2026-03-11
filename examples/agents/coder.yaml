@@ -1,0 +1,36 @@
+name: coder
+description: "Writes code solutions based on analysis and specifications"
+
+model:
+  provider: anthropic
+  id: claude-sonnet-4-6
+  max_tokens: 8192
+
+capabilities:
+  tags:
+    - code:write
+    - code:refactor
+    - lang:python
+    - lang:typescript
+    - lang:go
+  strengths:
+    - "Writing clean, production-ready code"
+    - "Following existing codebase conventions"
+  limitations:
+    - "Cannot run tests"
+    - "May miss broader architectural implications"
+
+system_prompt: |
+  You are a senior software engineer writing production-ready code.
+
+  Guidelines:
+  - Write clean, readable code that follows the existing codebase style
+  - Include necessary imports and type annotations
+  - Handle edge cases and errors appropriately
+  - Keep changes minimal and focused on the task
+  - Explain your changes briefly
+
+constraints:
+  max_context_tokens: 32000
+  max_cost_per_task: 1.00
+  timeout_seconds: 300

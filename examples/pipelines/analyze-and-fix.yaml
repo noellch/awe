@@ -1,0 +1,33 @@
+name: analyze-and-fix
+description: "Analyze a problem and produce a solution"
+
+context:
+  language: "python"
+
+steps:
+  - id: analyze
+    agent: researcher
+    prompt: |
+      Analyze the following problem and produce a technical analysis.
+      Include: root cause, affected components, and recommended approach.
+
+      Problem: {{input.problem}}
+    quality_gate:
+      mode: auto
+      checks: []
+    retry:
+      max_retries: 1
+
+  - id: fix
+    agent: coder
+    context_from:
+      - step: analyze
+        compress: summary
+    prompt: |
+      Based on the analysis above, write a solution.
+      Provide the code changes needed to fix the problem.
+    quality_gate:
+      mode: auto
+      checks: []
+    retry:
+      max_retries: 2
