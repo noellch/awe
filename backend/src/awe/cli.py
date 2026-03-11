@@ -23,8 +23,9 @@ console = Console()
 AWE_DIR = Path.cwd() / ".awe"
 DB_PATH = AWE_DIR / "awe.db"
 RUNS_DIR = AWE_DIR / "runs"
-PIPELINE_DIRS = [Path.cwd() / "pipelines", AWE_DIR / "pipelines"]
-AGENT_DIRS = [Path.cwd() / "agents", AWE_DIR / "agents"]
+_PROJECT_ROOT = Path.cwd().parent if (Path.cwd().parent / "examples").is_dir() else Path.cwd()
+PIPELINE_DIRS = [Path.cwd() / "pipelines", AWE_DIR / "pipelines", _PROJECT_ROOT / "examples" / "pipelines"]
+AGENT_DIRS = [Path.cwd() / "agents", AWE_DIR / "agents", _PROJECT_ROOT / "examples" / "agents"]
 
 
 @click.group()

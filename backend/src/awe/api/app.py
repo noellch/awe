@@ -30,18 +30,24 @@ def create_app(
     """Create and configure the FastAPI application."""
     from awe.api.routers import agents, pipelines, runs
 
-    # Defaults matching CLI conventions
+    # Defaults: search cwd, .awe/, and project root examples/
     awe_dir = Path.cwd() / ".awe"
+    # Detect project root (look for examples/ directory upward)
+    project_root = Path.cwd()
+    if (project_root.parent / "examples").is_dir():
+        project_root = project_root.parent
 
     _db_path = db_path or awe_dir / "awe.db"
     _runs_dir = runs_dir or awe_dir / "runs"
     _pipeline_dirs = pipeline_dirs or [
         Path.cwd() / "pipelines",
         awe_dir / "pipelines",
+        project_root / "examples" / "pipelines",
     ]
     _agent_dirs = agent_dirs or [
         Path.cwd() / "agents",
         awe_dir / "agents",
+        project_root / "examples" / "agents",
     ]
 
     _runs_dir.mkdir(parents=True, exist_ok=True)
